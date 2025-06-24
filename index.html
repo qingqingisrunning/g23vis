@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/v5/echarts.min.js"></script>
+    <style>
+        /* 表单容器样式，横向排列并居中 */
+        .form-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+            font-family: Arial, sans-serif;
+        }
+        .form-container label {
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        .form-container input[type="text"] {
+            padding: 6px 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 150px;
+        }
+
+        /* 主体容器三列横向排列 */
+        .main-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        /* 左侧容器 包含图表和趣闻 */
+        .left-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 900px; /* 与chart1宽度一致 */
+        }
+
+        /* 中间info-section容器，竖直排列3个info-section */
+        .info-sections-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 900px; /* 与左侧容器宽度一致 */
+        }
+
+        .info-section {
+            background-color: #fffbea;
+            border: 1px solid #f0e6a7;
+            border-radius: 6px;
+            padding: 15px 20px;
+            font-size: 16px;
+            color: #665500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            line-height: 1.6;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .info-section h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #997700;
+        }
+
+        /* 图表容器固定大小 */
+        .chart-container {
+            width: 900px;
+            height: 500px;
+        }
+        #chart2 {
+            width: 1000px;
+            height: 500px;
+        }
+
+        /* 趣闻文字区样式 */
+        .fun-fact {
+            padding: 15px 20px;
+            background-color: #fffbea;
+            border: 1px solid #f0e6a7;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #665500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            line-height: 1.6;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .fun-fact h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #997700;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <label for="name">姓名：</label>
+        <input type="text" id="name" name="name" placeholder="请输入姓名">
+
+        <label for="class">班级：</label>
+        <input type="text" id="class" name="class" placeholder="请输入班级">
+    </div>
+
+    <div class="main-container">
+        <div class="left-container">
+            <div id="chart1" class="chart-container"></div>
+
+            <!-- 趣闻区 -->
+
+        </div>
+
+        <div class="info-sections-container">
+            <div class="info-section">
+                <h2>科举制度1300多年时间线介绍</h2>
+                <p>
+                    科举制度起始于隋朝，发展于唐朝，历经宋、元、明、清等朝代，前后已有1300多年历史。它是中国历史上选拔官员的重要制度，通过公开考试选拔人才，促进了社会流动与文化传承。
+                </p>
+            </div>
+            <div class="info-section">
+                <h2>明代科举制度介绍</h2>
+                <p>
+                    明代科举制度严格，考场纪律严明，考试内容包括经义、策论等，强调考生的文章写作和政治见解。明代还设立了殿试，由皇帝亲自主持，选拔最高等级的进士。
+                </p>
+            </div>
+            <div class="info-section">
+                <h2>明代最辉煌的一届科举考试</h2>
+                <p>
+                    明朝嘉靖年间的一次科举考试被誉为最辉煌的一届，进士人数众多，才子辈出，涌现出许多后来在朝廷和文化界有卓越成就的人物，如著名文学家汤显祖。
+                </p>
+            </div>
+        </div>
+
+        <div id="chart2" class="chart-container"></div>
+    </div>
+
+    <script>
+        var chart1 = echarts.init(document.getElementById('chart1'), 'white', {renderer: 'canvas'});
+        var option1 = {
+            animation: true,
+            color: ["#5470c6", "#91cc75", "#fac858", "#ee6666"],
+            series: [{
+                type: 'line',
+                name: '科举考试次数',
+                data: [
+                    ['唐', 161],
+                    ['宋', 230],
+                    ['元', 68],
+                    ['明', 243],
+                    ['清', 230]
+                ],
+                label: { show: true, margin: 8 },
+                lineStyle: { width: 1 },
+                areaStyle: {
+                    color: {
+                        type: 'linear',
+                        x: 0, y: 0, x2: 0, y2: 1,
+                        colorStops: [
+                            {offset: 0, color: 'rgb(255, 158, 68)'},
+                            {offset: 1, color: 'rgb(255, 70, 131)'}
+                        ]
+                    }
+                }
+            }],
+            xAxis: [{ name: '朝代', data: ['唐', '宋', '元', '明', '清'] }],
+            yAxis: [{ name: '科举开科次数' }],
+            title: [{ text: '各朝代科举考试次数' }],
+            visualMap: {
+                show: true,
+                type: 'continuous',
+                min: 68,
+                max: 243,
+                orient: 'vertical',
+                itemWidth: 20,
+                itemHeight: 140,
+                calculable: true
+            }
+        };
+        chart1.setOption(option1);
+
+        var chart2 = echarts.init(document.getElementById('chart2'), 'white', {renderer: 'canvas'});
+        var option2 = {
+            animation: true,
+            color: ["#2f4554"],
+            series: [{
+                type: 'line',
+                name: '次数',
+                data: [
+                    ['', 0],
+                    ['唐', 263],
+                    ['五代十国', 47],
+                    ['宋', 118],
+                    ['辽', 57],
+                    ['金', 39],
+                    ['元', 16],
+                    ['明', 90],
+                    ['清', 112],
+                    [' ', 0]
+                ],
+                label: { show: true, margin: 8 },
+                lineStyle: { width: 3 },
+                itemStyle: { color: '#2f4554' }
+            }],
+            xAxis: [{
+                name: '朝代',
+                data: ['', '唐', '五代十国', '宋', '辽', '金', '元', '明', '清', ' '],
+                axisLabel: { rotate: 20, margin: 8 }
+            }],
+            yAxis: [{ name: '次数', min: 0 }],
+            title: [{ text: '各朝代科举考试次数', subtext: '单位：次' }],
+            tooltip: { trigger: 'axis' }
+        };
+        chart2.setOption(option2);
+    </script>
+</body>
+</html>
+
